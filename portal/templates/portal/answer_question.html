@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+Responder - {{ product.name }} - MKT
+
+{% endblock %}
+
+
+{% block head %}
+<style>
+  .acoes:hover {
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<h2>RESPONDER</h2>
+<hr>
+
+<!-- TRATAMENTO DE MENSAGENS-->
+<div style="display: flex; justify-content: center;">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert {{ message.tags}}">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+<br>
+
+<!-- GRAVAR resposta da PERGUNTA-->
+<div>
+  <form action="{% url 'responder' question.id %} " method="POST">
+    {% csrf_token %}
+    <div>
+      <strong><label for="id_question">Pergunta:</label><br></strong>
+      <i class="fa fa-comments">
+        <label>{{ question.question }} </label>
+      </i><br><br><br>
+    </div>
+    {{ form.as_p}}
+    <input type="submit" class="btn btn-primary btn-lg" value="Responder">
+    <a class="btn btn-success btn-lg" href="{% url 'products' %}">Voltar</a>
+  </form>
+</div>
+
+
+
+{% endblock %}

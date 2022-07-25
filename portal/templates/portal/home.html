@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+MKT - Home
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Seja bem vindo {{ user|upper }} </h1>
+<hr>
+<div style="text-align:center">
+  <div>
+    <p>
+      <a href="{% url 'products' %}" class="btn btn-primary">Meus Anúncios</a>
+      <a href="{% url 'addProduct' %}" class="btn btn-warning">Novo Anúncio</a>
+    </p>
+  </div>
+</div>
+{% else %}
+<h1>Seja bem vindo ao MARKETPLACE</h1>
+<h4>Para aproveitar melhor sua visita faça seu <a href="{% url 'register' %}"> cadastro</a>.</h4>
+<h4>Ou se já for usuário, faça o seu <a href="{% url 'login' %}">login</a>.</h4>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+Perguntas - {{ product.name }} - MKT
+
+{% endblock %}
+
+{% block head %}
+<style>
+  .acoes:hover {
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2>PERGUNTAS</h2>
+<h1>Produto : <strong>{{ product.name }}</strong></h1>
+<hr>
+
+<!-- TRATAMENTO DE MENSAGENS-->
+<div style="display: flex; justify-content: center;">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert {{ message.tags}}">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+<p><a class="btn btn-success btn-lg" href="{% url 'products' %}">Voltar</a></p>
+<br>
+
+<!-- LISTAGEM DE PERGUNTAS -->
+<table class="table table_bordered table-hover table-striped">
+  <tr>
+    <th>Pergunta</th>
+    <th />
+    <th />
+    <th>Ação</th>
+  </tr>
+
+  {% for q in questions %}
+  <tr>
+    <th>{{ q.question }}</th>
+    <th />
+    <th />
+    <th>
+      <a href="{% url 'responder' q.id %}" class="acoes" data-toggle="tooltip" title="Responder pergunta"> &nbsp;
+        Responder
+        &nbsp; </a>
+    </th>
+  </tr>
+  {% endfor %}
+</table>
+
+
+
+{% endblock %}

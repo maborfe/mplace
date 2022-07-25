@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+MKT - Login
+{% endblock %}
+
+{% block content %}
+
+  <h1>Cadastro concluído</h1>
+  <h3>Seja bem vindo</h3>
+
+  <p>Faça seu login <a href="{% url 'login' %}">aqui</a> </p>
+   
+
+  <hr>
+
+  <form action="">
+  {{ form.as_p }}
+  </form>
+{% endblock %}

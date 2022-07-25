@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+MKT - Cadastro
+{% endblock %}
+
+{% block content %}
+
+  <H3>CADASTRE-SE</H3>
+
+  <hr>
+
+  <form action="{% url 'register' %}" method="POST" class="form-horizontal">{% csrf_token %}
+  {{ form.as_p }}
+  <br>
+  <input type="submit" class="btn btn-primary" value="Enviar">
+  </form>
+  
+{% endblock %}

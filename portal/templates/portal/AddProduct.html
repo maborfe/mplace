@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+Produtos - MKT
+
+{% endblock %}
+
+{% block content %}
+
+<h2>Novo Anúncio</h2>
+<hr>
+<div style="  margin: 0 auto;
+display: flex;
+align-items: center;
+justify-content: center;">
+  <form style="width: 500px; border: 1px solid lightgray; padding: 10px;" method="post">{% csrf_token %}
+
+    {{ form.as_p }}
+
+    <hr>
+    <input type="submit" name="submit" value="Enviar" id="submit" class="btn btn-success btn-lg">
+    <input type="reset" name="reset" value="Limpar" class="btn btn-warning btn-lg">
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+
+Produtos - MKT
+
+{% endblock %}
+
+{% block head %}
+<style>
+  .acoes:hover {
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2>Meus Anúncios</h2>
+<hr>
+
+<!-- TRATAMENTO DE MENSAGENS-->
+<div style="display: flex; justify-content: center;">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert {{ message.tags}}">
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+
+<p>
+  <a href="{% url 'home'%}" class="btn btn-primary btn-lg">Voltar</a>
+  <a class="btn btn-success btn-lg" href="{% url 'addProduct' %}">Novo Anúncio</a>
+</p>
+<br>
+
+<!-- LISTAGEM DE ANÚNCIOS -->
+<table class="table table_bordered table-hover table-striped">
+  <tr style="color:green; font-weight: bolder; font-size: 16px;">
+    <th style=" text-align:center;">Código</th>
+    <th style="text-align:center;">Título</th>
+    <th style="text-align:center;">Preço</th>
+    <th style="text-align:center;">Descricao Breve</th>
+    <th style="text-align:center;">Status</th>
+    <th style="text-align:center;">Ativar/Inativar</th>
+    <th style="text-align:center;">Ações</th>
+  </tr>
+
+  {% for product in products %}
+  <tr>
+    <th style="text-align:center;">{{ product.id }}</th>
+    <th style="text-align:center;">{{ product.name }}</th>
+    <th style="text-align:center;">{{ product.price }}</th>
+    <th style="text-align:center;">{{ product.short_description }}</th>
+    <th style="text-align:center;">{{ product.status }}</th>
+    <th style="text-align:center;"">
+      <a href=" {% url 'ativar' product.id %}" class="acoes" data-toggle="tooltip" title="Ativar Anúncio"> &nbsp; A
+      &nbsp; </a> |
+      <a href="{% url 'desativar' product.id %}" class="acoes" data-toggle="tooltip" title="Inativar Anúncio"> &nbsp; I
+        &nbsp; </a>
+    </th>
+    <th style="text-align:center;">
+      <a href="{% url 'editProduct' product.id %}" class="acoes" data-toggle="tooltip" title="Modificar Anúncio"> &nbsp;
+        M
+        &nbsp; </a> |
+      <a href="{{ product.get_absolute_url }}" class="acoes" data-toggle="tooltip" title="Exibir Anúncio"> &nbsp; E
+        &nbsp; </a> |
+      {% if product.questions_without_answers > 0 %}
+      <a href="{% url 'question_list' product.id %}" class="acoes" data-toggle="tooltip"
+        title="Perguntas Não Respondidas">
+        &nbsp;({{product.questions_without_answers}})
+        {% else %}
+        &nbsp;
+        <spam style="color: lightgrey;">(0)</spam>
+
+        {% endif %}
+      </a>
+    </th>
+  </tr>
+  {% endfor %}
+</table>
+
+
+
+{% endblock %}
